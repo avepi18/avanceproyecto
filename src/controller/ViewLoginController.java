@@ -69,8 +69,10 @@ public class ViewLoginController implements Initializable {
                             try{
                                boolean resultado = objUsuario.validarVigencia(usuario);
                                if(resultado==true){
-                                 JOptionPane.showMessageDialog(null,"Esta vigente el usuario"); 
-                                 
+                                 JOptionPane.showMessageDialog(null,"Esta vigente el usuario");
+ 
+                                 loadStage("/view/ViewPrincipal.fxml",event);
+                                 //Parent root = FXMLLoader.load(getClass().getResource("/view/ViewPrincipal.fxml"));
                                  
 
                           
@@ -96,7 +98,37 @@ public class ViewLoginController implements Initializable {
         // TODO
     }    
     
+    private void loadStage(String url, Event event){
+        try {
+            
+            Object eventSource = event.getSource();
+            Node sourceAsNode = (Node) eventSource ;
+            Scene oldScene = sourceAsNode.getScene();
+            Window window = oldScene.getWindow();
+            Stage stage = (Stage) window;
+            stage.hide();
+            
+            Parent root =FXMLLoader.load(getClass().getResource(url));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+            newStage.show();
+            
+            newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event){
+                    Platform.exit();
+                
+                }               
+        });       
+        }catch (IOException ex){
+      //      Logger.getLogger(ViewLoginController.class.getName()).log(Level.SEVERE,null, ex);
+        
+        }
     
+    
+    }
     
     
     

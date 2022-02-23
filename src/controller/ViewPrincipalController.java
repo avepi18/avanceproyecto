@@ -43,10 +43,7 @@ public class ViewPrincipalController implements Initializable {
     private void Scene3Action(ActionEvent event) throws IOException{
         
        // loadStage2("/view/Save.fxml",event);
-        
-        
-        
-        
+
         
        //  Parent root = FXMLLoader.load(getClass().getResource("/view/Save.fxml"));
                
@@ -58,28 +55,33 @@ public class ViewPrincipalController implements Initializable {
       //  stage.setScene(new Scene(root));
       //  stage.setTitle("Scene 3 Window");
       //  stage.show();
-        
-        
-           
+       
     
     }
-    
-    
-        
-        
+        @FXML
+        void pruebaAction(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Save.fxml"));
+        Parent root = loader.load();
+        SaveController controller = loader.getController();  
+        Scene scene2 = new Scene(root);
+        Stage stage2 = new Stage();
+        stage2.setScene(scene2);
+        stage2.show();
+        this.stage2.close();   
         
         //Stage stage = new Stage();
         //stage.setScene(new Scene(root));
         //stage.setTitle("Save");
         //stage.show();
-        
-        
-        
 
-    
+    }
       
-   
+    public void setStage(Stage primaryStage){
+        stage2 = primaryStage;
     
+    }
+
+
 
     /**
      * Initializes the controller class.
