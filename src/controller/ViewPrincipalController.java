@@ -40,24 +40,84 @@ public class ViewPrincipalController implements Initializable {
     private Button btnprueba;
     
     @FXML
-    private void Scene3Action(ActionEvent event) throws IOException{
-        
-       // loadStage2("/view/Save.fxml",event);
+    private ScrollPane scroll;
 
+    @FXML
+    private GridPane grid;
+    
+    private List<Heroe> heroes = new ArrayList<>();
+    private Image image;
+    
+    
+    private List<Heroe> getData(){
+        List<Heroe> heroes  = new ArrayList();
+        Heroe heroe;
         
-       //  Parent root = FXMLLoader.load(getClass().getResource("/view/Save.fxml"));
-               
-      
-      //  FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Save.fxml"));
-      //  Parent root = loader.load();
-        
-      //  Stage stage = new Stage();
-      //  stage.setScene(new Scene(root));
-      //  stage.setTitle("Scene 3 Window");
-      //  stage.show();
-       
+       // for(int i=0; i<20; i++){
+            heroe = new Heroe();
+            heroe.setName("Spiderman");
+            heroe.setImageSrc("/imagenes/a.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Capitán América");
+            heroe.setImageSrc("/imagenes/b.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Thor");
+            heroe.setImageSrc("/imagenes/c.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Hulk");
+            heroe.setImageSrc("/imagenes/d.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Black Widow");
+            heroe.setImageSrc("/imagenes/e.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Pantera Negra");
+            heroe.setImageSrc("/imagenes/f.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Superman");
+            heroe.setImageSrc("/imagenes/g.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Batman");
+            heroe.setImageSrc("/imagenes/h.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Mujer Maravilla");
+            heroe.setImageSrc("/imagenes/i.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Acuaman");
+            heroe.setImageSrc("/imagenes/j.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Flash");
+            heroe.setImageSrc("/imagenes/k.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Star Lord");
+            heroe.setImageSrc("/imagenes/l.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Iro man");
+            heroe.setImageSrc("/imagenes/m.png");
+            
+            heroe = new Heroe();
+            heroe.setName("Wolverine");
+            heroe.setImageSrc("/imagenes/n.png");
+      //  }
+        return heroes;
     
     }
+    
+    
+    
+    
+  
         @FXML
         void pruebaAction(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Save.fxml"));
@@ -88,7 +148,52 @@ public class ViewPrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        heroes.addAll(getData());
+        int column = 0;
+        int row = 0;
+        try {
+        for(int i=0; i<heroes.size(); i++){
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/ViewHeroes.fxml"));
+            
+                AnchorPane anchorPane = fxmlLoader.load();
+           
+            
+            ViewHeroesController viewHeroesController = fxmlLoader.getController();
+            viewHeroesController.setData(heroes.get(i));
+            
+            if(column == 3){
+                column = 0;
+                row++;
+            
+            }
+            
+            grid.add(anchorPane, column++, row);
+            
+            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            grid.setMaxWidth(Region.USE_PREF_SIZE);
+            
+            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            grid.setMaxHeight(Region.USE_PREF_SIZE);
+            
+            
+            
+            
+            GridPane.setMargin(anchorPane,new Insets(10, 10, 10, 10));
+        }
+            
+             } catch (IOException ex) {
+                Logger.getLogger(ViewPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        
+              
+        
+        
+        
     }    
     
    
